@@ -1,0 +1,141 @@
+/* Import Poppins font for elegant typography */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+/* Root color palette and variables */
+:root {
+  --bg-light: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --key-bg: #ffe5f0; /* Soft pink background for keys */
+  --key-hover-bg: #f9c1de; /* Brighter pink on hover */
+  --key-active-bg: #f2a8d9; /* Active darker pink */
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  --border-radius: 0.75rem;
+  --container-max-width: 1200px;
+  --transition-speed: 0.25s;
+  --font-family: 'Poppins', sans-serif;
+  --primary-pink: #db2777; /* Pink accent color */
+  --primary-pink-dark: #be185d;
+}
+
+/* Global reset */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background: var(--bg-light);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+}
+
+/* Container centered with max width */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  background: var(--bg-light);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 24px var(--shadow-light);
+  padding: 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  text-align: center;
+}
+
+/* Headline styling */
+h1 {
+  font-weight: 700;
+  font-size: 3.5rem;
+  margin: 0 0 0.25rem 0;
+}
+
+/* Subtitle text */
+p.subtitle {
+  font-weight: 400;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin: 0 0 2rem 0;
+  max-width: 700px;
+}
+
+/* Input field styling */
+#textInput {
+  width: 100%;
+  max-width: 720px;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--primary-pink);
+  border-radius: var(--border-radius);
+  color: var(--text-primary);
+  background: #fff0f6;
+  outline-offset: 3px;
+  outline-color: transparent;
+  box-shadow: inset 0 2px 4px var(--shadow-light);
+  transition: border-color var(--transition-speed);
+  user-select: text;
+}
+
+#textInput:focus {
+  border-color: var(--primary-pink-dark);
+  outline-color: var(--primary-pink-dark);
+  background: #ffe6f0;
+}
+
+/* Keyboard container - grid layout */
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(15, minmax(36px, 1fr));
+  gap: 0.75rem 1rem;
+  max-width: 720px;
+  width: 100%;
+  user-select: none;
+}
+
+/* Key base styling */
+button.key {
+  background: var(--key-bg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 6px var(--shadow-light);
+  color: var(--primary-pink-dark);
+  font-weight: 600;
+  font-size: 1.125rem;
+  padding: 0.75rem 0;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-speed),
+    color var(--transition-speed),
+    transform var(--transition-speed),
+    box-shadow var(--transition-speed),
+    border-color var(--transition-speed);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 48px;
+  user-select: none;
+}
+
+button.key:hover,
+button.key:focus-visible {
+  background-color: var(--key-hover-bg);
+  color: var(--primary-pink);
+  border-color: var(--primary-pink);
+  box-shadow:
+    0 8px 20px rgba(219, 39, 119, 0.3),
+    0 3px 6px var(--shadow-light);
+  outline: none;
+  transform: scale (-primary-pink);
+}

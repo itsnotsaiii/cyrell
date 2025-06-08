@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Elegant Pink Virtual Keyboard</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+    /* Root colors and fonts */
+    :root {
+      --bg-light: #ffffff;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+      --key-bg: #ffe5f0; /* soft pink background for keys */
+      --key-hover-bg: #f9c1de; /* brighter pink on hover */
+      --key-active-bg: #f2a8d9; /* active darker pink */
+      --shadow-light: rgba(0,0,0,0.05);
+      --border-radius: 0.75rem;
+      --container-max-width: 1200px;
+      --transition-speed: 0.25s;
+      --font-family: 'Poppins', sans-serif;
+      --primary-pink: #db2777; /* pink accent color for borders and active states */
+      --primary-pink-dark: #be185d;
+    }
+
+    /* Global styles */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: var(--font-family);
+      background: var(--bg-light);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 1rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      user-select: none;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: var(--container-max-width);
+      background: var(--bg-light);
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 24px var(--shadow-light);
+      padding: 3rem 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Headline */
+    h1 {
+      font-weight: 700;
+      font-size: 3.5rem;
+      margin: 0 0 0.25rem 0;
+    }
+    p.subtitle {
+      font-weight: 400;
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      margin: 0 0 2rem;
+      max-width: 700px;
+    }
+
+    /* Input field */
+    #textInput {
+      width: 100%;
+      max-width: 720px;
+      font-size: 2rem;
+      font-weight: 600;
+      padding: 1rem 1.5rem;
+      border: 2px solid var(--primary-pink);
+      border-radius: var(--border-radius);
+      color: var(--text-primary);
+      background: #fff0f6;
+      outline-offset: 3px;
+      outline-color: transparent;
+      box-shadow: inset 0 2px 4px var(--shadow-light);
+      transition: border-color var(--transition-speed);
+      user-select: text;
+    }
+    #textInput:focus {
+      border-color: var(--primary-pink-dark);
+      outline-color: var(--primary-pink-dark);
+      background: #ffe6f0;
+    }
+
+    /* Keyboard layout container */
+    .keyboard {
+      display: grid;
+      grid-template-columns: repeat(15, minmax(36px, 1fr));
+      gap: 0.75rem 1rem;
+      max-width: 720px;
+      width: 100%;
+      user-select: none;
+    }
+
+    /* Individual key style */
+    button.key {
+      background: var(--key-bg);
+      border-radius: var(--border-radius);
+      box-shadow: 0 1px 6px var(--shadow-light);
+      color: var(--primary-pink-dark);
+      font-weight: 600;
+      font-size: 1.125rem;
+      padding: 0.75rem 0;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition:
+        background-color var(--transition-speed),
+        color var(--transition-speed),
+        transform var(--transition-speed),
+        box-shadow var(--transition-speed),
+        border-color var(--transition-speed);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 48px;
+      user-select: none;
+    }
+    button.key:hover,
+    button.key:focus-visible {
+      background-color: var(--key-hover-bg);
+      color: var(--primary-pink);
+      border-color: var(--primary-pink);
+      box-shadow:
+        0 8px 20px rgba(219, 39, 119, 0.3),
+        0 3px 6px var(--shadow-light);
+      outline: none;
+      transform: scale(1.05);
+      z-index: 10;
+    }
+    button.key:active {
+      background-color: var(--key-active-bg);
+      transform: scale(0.97);
+      box-shadow: none;
+      border-color: var(--primary-pink-dark);
+      color: var(--primary-pink-dark);
+    }
+
+    /* Active CapsLock styling */
+    button.key.active {
+      background-color: var(--primary-pink);
+      color: #fff;
+      border-color: var(--primary-pink-dark);
+      box-shadow:
+        0 8px 20px rgba(219, 39, 119, 0.6),
+        0 3px 6px rgba(190, 24, 93, 0.6);
+    }
+
+    /* Special keys with larger width */
+    button.key.wide {
+      grid-column: span 2;
+    }
+    button.key.extra-wide {
+      grid-column: span 4;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .container {
+        padding: 2rem 1.5rem;
+      }
+      .keyboard {
+        grid-template-columns: repeat(12, minmax(30px, 1fr));
+        max-width: 100%;
+        gap: 0.5rem 0.75rem;
+      }
+      button.key.wide {
+        grid-column: span 3;
+      }
+      button.key.extra-wide {
+        grid-column: span 5;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main" aria-label="Elegant pink virtual keyboard application">
+    <h1>Elegant Pink Virtual Keyboard</h1>
+    <p class="subtitle">Click the keys below or use your physical keyboard to type</p>
+    <input type="text" id="textInput" placeholder="Type here..." aria-label="Text input" autocomplete="off" spellcheck="false" readonly />
+
+    <div class="keyboard" role="list" aria-label="Virtual keyboard">
+      <!-- Keys generated by JavaScript -->
+    </div>
+  </main>
+
+  <script>
+    const keysLayout = [
+      ['Escape', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'Delete', 'Backspace'],
+      ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'Delete'],
+      ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\', 'Enter'],
+      ['CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', 'Enter'],
+      ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift'],
+      ['Control', 'Meta', 'Alt', 'Space', 'Alt', 'Meta', 'Menu', 'Control']
+    ];
+
+    const specialKeys = new Set([
+      'Backspace', 'Tab', 'CapsLock', 'Enter', 'Shift', 'Control', 'Alt', 'Meta', 'Escape', 'Delete', 'Space', 'Menu'
+    ]);
+
+    const keySpans = {
+      'Backspace': 2,
+      'Tab': 1.5,
+      'CapsLock': 2,
+      'Enter': 2.5,
+      'Shift': 2.5,
+      'Control': 1.5,
+      'Alt': 1.5,
+      'Meta': 1.5,
+      'Space': 5,
+      'Escape': 1.5,
+      'Delete': 1.5,
+      'F1': 1, 'F2': 1, 'F3': 1, 'F4': 1, 'F5': 1,
+      'F6': 1, 'F7': 1, 'F8': 1, 'F9': 1, 'F10': 1, 'F11': 1, 'F12': 1,
+      'Menu': 1.5,
+    };
+
+    const keyboard = document.querySelector('.keyboard');
+    const textInput = document.getElementById('textInput');
+    let capsLock = false;
+
+    function insertAtCursor(text) {
+      textInput.value += text;
+    }
+
+    function updateKeysCase() {
+      document.querySelectorAll('button.key').forEach(keyBtn => {
+        const key = keyBtn.dataset.key;
+        if (!specialKeys.has(key)) {
+          keyBtn.textContent = capsLock ? key.toUpperCase() : key.toLowerCase();
+        }
+      });
+    }
+
+    keysLayout.forEach(row => {
+      row.forEach(keyLabel => {
+        const keyButton = document.createElement('button');
+        keyButton.type = 'button';
+        keyButton.classList.add('key');
+        keyButton.dataset.key = keyLabel;
+
+        if (keyLabel in keySpans) {
+          keyButton.style.gridColumn = `span ${keySpans[keyLabel]}`;
+        }
+
+        switch (keyLabel) {
+          case 'Backspace': keyButton.textContent = '⌫'; break;
+          case 'Enter': keyButton.textContent = '↵'; break;
+          case 'Tab': keyButton.textContent = '⇥'; break;
+          case 'CapsLock': keyButton.textContent = '⇪'; break;
+          case 'Shift': keyButton.textContent = '⇧'; break;
+          case 'Control': keyButton.textContent = 'Ctrl'; break;
+          case 'Meta': keyButton.textContent = 'Meta'; break;
+          case 'Alt': keyButton.textContent = 'Alt'; break;
+          case 'Escape': keyButton.textContent = 'Esc'; break;
+          case 'Space': keyButton.textContent = ''; break; // empty for space key
+          default:
+            keyButton.textContent = capsLock ? keyLabel.toUpperCase() : keyLabel.toLowerCase();
+        }
+
+        keyButton.setAttribute('aria-label', `Key ${keyLabel}`);
+
+        keyButton.addEventListener('click', () => {
+          const key = keyLabel;
+
+          if (key === 'Backspace') {
+            textInput.value = textInput.value.slice(0, -1);
+          }
+          else if (key === 'Tab') {
+            insertAtCursor('\t');
+          }
+          else if (key === 'Enter') {
+            insertAtCursor('\n');
+          }
+          else if (key === 'CapsLock') {
+            capsLock = !capsLock;
+            updateKeysCase();
+            keyButton.classList.toggle('active', capsLock);
+          }
+          else if (key === 'Shift') {
+            keyButton.classList.add('active');
+            const handleAfterClick = () => {
+              keyButton.classList.remove('active');
+              updateKeysCase();
+              document.removeEventListener('click', handleAfterClick);
+            };
+            capsLock = true;
+            updateKeysCase();
+            document.addEventListener('click', handleAfterClick, { once: true });
+          }
+          else if (key === 'Space') {
+            insertAtCursor(' ');
+          }
+          else if (specialKeys.has(key)) {
+            // Ignore other special keys for simplicity
+          }
+          else {
+            insertAtCursor(capsLock ? key.toUpperCase() : key.toLowerCase());
+            if (capsLock && !document.querySelector('.key.active')) {
+              capsLock = false;
+              updateKeysCase();
+            }
+          }
+          textInput.focus();
+        });
+
+        keyboard.appendChild(keyButton);
+      });
+    });
+  </script>
+</body>
+</html>
